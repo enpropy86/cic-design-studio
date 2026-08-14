@@ -1,0 +1,19 @@
+﻿# Core computation
+numpy>=1.24
+scipy>=1.10
+
+# GUI
+PyQt6>=6.5
+
+# LLM API
+requests>=2.28
+
+# Visualization
+matplotlib>=3.7
+
+# PDF text extraction (thesis/material tooling only)
+PyPDF2>=3.0
+markdown>=3.4
+
+# Optional: .doc/.docx extraction on Windows (extract_pdf.py)
+# pywin32>=306 ; sys_platform == 'win32'
