@@ -1,0 +1,37 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Runtime artifacts
+py/.logs/
+py/.chat_history/
+py/crash.log
+crash.log
+
+# Generated output
+py/rtl/
+py/tb/
+
+# Thesis build artifacts
+thesis/*.aux
+thesis/*.bbl
+thesis/*.blg
+thesis/*.fdb_latexmk
+thesis/*.fls
+thesis/*.log
+thesis/*.out
+thesis/*.toc
+thesis/*.thm
+thesis/*.xdv
+thesis/*.synctex.gz
+thesis/build/
+
+# Personal / private material (NOT for distribution)
+material/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

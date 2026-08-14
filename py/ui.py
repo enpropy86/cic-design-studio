@@ -76,7 +76,7 @@ THEME = {
 
 GLOBAL_STYLESHEET = f"""
 QWidget {{
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", sans-serif;
     color: {THEME['text']};
     font-size: 13px;
 }}

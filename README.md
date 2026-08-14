@@ -79,21 +79,77 @@ cd cic-design-studio
 pip install -r requirements.txt
 ```
 
-### 配置 LLM API（可选）
+### 配置 LLM API
 
-工具调用 OpenAI API 格式兼容的对话接口，通过环境变量配置，默认使用 deepseek-v4-flash 模型：
+工具调用 **OpenAI API 格式兼容** 的对话接口完成智能对话与自然语言参数推荐，全部通过环境变量配置，**代码中不包含任何 API Key**。
+
+#### 默认配置：DeepSeek + deepseek-v4-flash
+
+只需设置 API Key 即可使用，模型与接口地址均带默认值：
 
 ```bash
 # Windows (PowerShell)
-$env:DEEPSEEK_API_KEY = "sk-你的密钥"
-$env:DEEPSEEK_MODEL   = "deepseek-v4-flash"     # 可选，默认 deepseek-v4-flash
-$env:DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions"  # 可选
-
-# Linux / macOS
-export DEEPSEEK_API_KEY="sk-你的密钥"
+$env:DEEPSEEK_API_KEY = "sk-你的DeepSeek密钥"
 ```
 
-不配置 API Key 时，全部确定性功能（参数设计、频响验证、RTL 生成、协同仿真）均可正常使用，仅 LLM 辅助功能（智能对话、参数推荐）不可用。
+| 环境变量 | 默认值 | 说明 |
+|---|---|---|
+| `DEEPSEEK_API_KEY` | 必填，无默认值 | DeepSeek API Key（在 https://platform.deepseek.com 获取） |
+| `DEEPSEEK_MODEL` | `deepseek-v4-flash` | 对话模型名称 |
+| `DEEPSEEK_API_URL` | `https://api.deepseek.com/chat/completions` | OpenAI 兼容接口地址 |
+
+默认使用 **deepseek-v4-flash**（dsv4f）模型，不需要额外配置。
+
+#### 使用其他模型
+
+##### 切换 DeepSeek 的其他模型
+
+```bash
+$env:DEEPSEEK_API_KEY = "sk-你的DeepSeek密钥"
+$env:DEEPSEEK_MODEL   = "deepseek-chat"        # 或 deepseek-reasoner
+```
+
+##### 使用 OpenAI 模型
+
+```bash
+$env:DEEPSEEK_API_KEY = "sk-你的OpenAI密钥"
+$env:DEEPSEEK_MODEL   = "gpt-4o"               # 或 gpt-4o-mini 等
+$env:DEEPSEEK_API_URL = "https://api.openai.com/v1/chat/completions"
+```
+
+##### 使用其他 OpenAI 兼容服务（通义 / Kimi / 智谱 / vLLM / Ollama 等）
+
+任何提供 OpenAI 兼容 `/chat/completions` 接口的服务均可接入，只需修改 `DEEPSEEK_API_URL` 与 `DEEPSEEK_MODEL`：
+
+```bash
+# Windows (PowerShell)
+$env:DEEPSEEK_API_KEY = "你的服务商密钥"
+$env:DEEPSEEK_MODEL   = "qwen-max"             # 按服务商模型名填写
+$env:DEEPSEEK_API_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"  # 例：阿里云百炼
+
+# Linux / macOS
+export DEEPSEEK_API_KEY="你的服务商密钥"
+export DEEPSEEK_MODEL="qwen-max"
+export DEEPSEEK_API_URL="https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"
+```
+
+常见服务商配置参考：
+
+| 服务商 | `DEEPSEEK_API_URL` | 模型示例 |
+|---|---|---|
+| DeepSeek（默认） | `https://api.deepseek.com/chat/completions` | `deepseek-v4-flash` / `deepseek-chat` / `deepseek-reasoner` |
+| OpenAI | `https://api.openai.com/v1/chat/completions` | `gpt-4o` / `gpt-4o-mini` |
+| 阿里云百炼（通义千问） | `https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions` | `qwen-max` / `qwen-plus` |
+| Moonshot（Kimi） | `https://api.moonshot.cn/v1/chat/completions` | `moonshot-v1-8k` 等 |
+| 智谱 GLM | `https://open.bigmodel.cn/api/paas/v4/chat/completions` | `glm-4-plus` 等 |
+| 本地 vLLM | `http://localhost:8000/v1/chat/completions` | 你部署的模型名 |
+| 本地 Ollama | `http://localhost:11434/v1/chat/completions` | `llama3.1` 等 |
+
+> **说明**：LLM 只负责设计意图理解、参数推荐与对话；所有数值计算（位宽、频响、系数、资源估算）均由本地确定性算法完成。更换模型或完全关闭 LLM 都不影响 RTL 生成与验证的正确性。
+
+#### 不配置 API Key 时
+
+全部确定性功能（参数设计、频响验证、RTL 生成、协同仿真、MATLAB 脚本生成等）均可正常使用；仅 AI 对话与自然语言参数推荐不可用。
 
 ## 快速开始
 
