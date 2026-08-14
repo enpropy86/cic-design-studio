@@ -50,7 +50,7 @@
 ### 获取代码
 
 ```bash
-git clone https://github.com/<你的用户名>/cic-design-studio.git
+git clone https://github.com/enpropy86/cic-design-studio.git
 cd cic-design-studio
 ```
 
