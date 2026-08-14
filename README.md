@@ -62,12 +62,12 @@ pip install -r requirements.txt
 
 ### 配置 LLM API（可选）
 
-工具调用 OpenAI 兼容的对话接口，**代码中不包含任何 API Key**，通过环境变量配置：
-
+工具调用 OpenAI API格式兼容的对话接口，通过环境变量配置：
+默认使用deepseek-v4-flash
 ```bash
 # Windows (PowerShell)
 $env:DEEPSEEK_API_KEY = "sk-你的密钥"
-$env:DEEPSEEK_MODEL   = "deepseek-chat"     # 可选，默认 deepseek-v4-flash
+$env:DEEPSEEK_MODEL   = "deepseek-v4-flash"     # 可选，默认 deepseek-v4-flash
 $env:DEEPSEEK_API_URL = "https://api.deepseek.com/chat/completions"  # 可选
 
 # Linux / macOS
